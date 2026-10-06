@@ -2,6 +2,9 @@
 
 > **An interactive Automata Theory laboratory for validating DFAs, automatically completing incomplete DFAs with trap states, generating mathematical complements, and simulating strings step-by-step.**
 
+🔗 **Live Deployment:** [https://dfa-complementer.vercel.app/](https://dfa-complementer.vercel.app/)
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-dfa--complementer.vercel.app-000000?logo=vercel&logoColor=white)](https://dfa-complementer.vercel.app/)
 [![CI Pipeline](https://github.com/aryarewatkar2405-crypto/dfa-complementer/actions/workflows/ci.yml/badge.svg)](https://github.com/aryarewatkar2405-crypto/dfa-complementer/actions/workflows/ci.yml)
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -13,6 +16,7 @@
 
 ## 📑 Table of Contents
 
+- [Live Demo](#-live-demo)
 - [Overview](#-overview)
 - [The Theoretical Problem](#-the-theoretical-problem)
 - [Mathematical Foundations](#-mathematical-foundations)
@@ -40,7 +44,15 @@
 
 ---
 
+## 🌐 Live Demo
+
+Access the interactive web application live at:  
+👉 **[https://dfa-complementer.vercel.app/](https://dfa-complementer.vercel.app/)**
+
+---
+
 ## 🔬 Overview
+
 
 **DFA Complementer** is an academic-grade, visual verification workbench designed for computer science students, researchers, and automata theory educators. 
 
@@ -345,5 +357,7 @@ This project was built as an educational tool for courses in:
 ## 👤 Author & License
 
 - **Author**: Arya Rewatkar ([@aryarewatkar2405-crypto](https://github.com/aryarewatkar2405-crypto))
+- **Live Demo**: [https://dfa-complementer.vercel.app/](https://dfa-complementer.vercel.app/)
 - **Repository**: [https://github.com/aryarewatkar2405-crypto/dfa-complementer.git](https://github.com/aryarewatkar2405-crypto/dfa-complementer.git)
 - **License**: MIT License
+
