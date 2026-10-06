@@ -34,14 +34,14 @@ export const CompareView: React.FC<CompareViewProps> = ({
         </div>
 
         {/* Quick Formal Summary */}
-        <div className="flex items-center gap-4 text-xs font-mono bg-dark-900/90 px-3 py-2 rounded-lg border border-white/[0.06]">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-mono bg-dark-900/90 px-3 py-2 rounded-lg border border-white/[0.06] max-w-full">
           <div>
             <span className="text-slate-400 block text-[10px]">ORIGINAL F:</span>
             <span className="text-emerald-400 font-semibold">
               {'{' + completedDFA.acceptStates.join(', ') + '}'}
             </span>
           </div>
-          <ArrowRight className="w-4 h-4 text-slate-500" />
+          <ArrowRight className="w-4 h-4 text-slate-500 shrink-0" />
           <div>
             <span className="text-slate-400 block text-[10px]">COMPLEMENT Fᶜ:</span>
             <span className="text-brand-400 font-semibold">
@@ -52,21 +52,21 @@ export const CompareView: React.FC<CompareViewProps> = ({
       </div>
 
       {/* Side-by-Side Visualizers */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-[420px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-[380px]">
         {/* Left: Completed DFA */}
-        <div className="flex flex-col bg-dark-900 border border-white/[0.08] rounded-xl p-3 shadow-lg">
-          <div className="flex items-center justify-between mb-2 px-1">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-emerald-500/20" />
-              <span className="text-xs font-bold text-slate-200 tracking-wide font-mono">
+        <div className="flex flex-col bg-dark-900 border border-white/[0.08] rounded-xl p-3 shadow-lg min-w-0">
+          <div className="flex items-center justify-between mb-2 px-1 gap-2">
+            <div className="flex items-center gap-2 truncate">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-emerald-500/20 shrink-0" />
+              <span className="text-xs font-bold text-slate-200 tracking-wide font-mono truncate">
                 COMPLETED DFA (M)
               </span>
             </div>
-            <span className="text-[11px] text-emerald-400 font-mono bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/50">
+            <span className="text-[11px] text-emerald-400 font-mono bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/50 shrink-0">
               Accepting: {completedDFA.acceptStates.length} / {completedDFA.states.length}
             </span>
           </div>
-          <div className="flex-1 min-h-[340px]">
+          <div className="flex-1 h-[320px] sm:h-[360px] lg:h-[400px] touch-pan-pinch">
             <DFAVisualizer
               dfa={completedDFA}
               title="Complete Original DFA (M)"
@@ -77,19 +77,19 @@ export const CompareView: React.FC<CompareViewProps> = ({
         </div>
 
         {/* Right: Complement DFA */}
-        <div className="flex flex-col bg-dark-900 border border-white/[0.08] rounded-xl p-3 shadow-lg">
-          <div className="flex items-center justify-between mb-2 px-1">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-brand-500 ring-2 ring-brand-500/20" />
-              <span className="text-xs font-bold text-slate-200 tracking-wide font-mono">
+        <div className="flex flex-col bg-dark-900 border border-white/[0.08] rounded-xl p-3 shadow-lg min-w-0">
+          <div className="flex items-center justify-between mb-2 px-1 gap-2">
+            <div className="flex items-center gap-2 truncate">
+              <span className="w-2.5 h-2.5 rounded-full bg-brand-500 ring-2 ring-brand-500/20 shrink-0" />
+              <span className="text-xs font-bold text-slate-200 tracking-wide font-mono truncate">
                 COMPLEMENT DFA (Mᶜ)
               </span>
             </div>
-            <span className="text-[11px] text-brand-400 font-mono bg-brand-950/60 px-2 py-0.5 rounded border border-brand-800/50">
+            <span className="text-[11px] text-brand-400 font-mono bg-brand-950/60 px-2 py-0.5 rounded border border-brand-800/50 shrink-0">
               Accepting: {complementDFA.acceptStates.length} / {complementDFA.states.length}
             </span>
           </div>
-          <div className="flex-1 min-h-[340px]">
+          <div className="flex-1 h-[320px] sm:h-[360px] lg:h-[400px] touch-pan-pinch">
             <DFAVisualizer
               dfa={complementDFA}
               title="Complement DFA (Mᶜ)"
@@ -106,8 +106,9 @@ export const CompareView: React.FC<CompareViewProps> = ({
           <ArrowLeftRight className="w-3.5 h-3.5 text-brand-400" />
           State Status Comparison Table
         </h4>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left font-mono text-xs border-collapse">
+        <div className="overflow-x-auto no-scrollbar max-w-full touch-pan-pinch">
+          <table className="w-full min-w-[340px] text-left font-mono text-xs border-collapse">
+
             <thead>
               <tr className="border-b border-white/[0.08] text-slate-400 bg-white/[0.02]">
                 <th className="py-2 px-3">State q ∈ Q</th>

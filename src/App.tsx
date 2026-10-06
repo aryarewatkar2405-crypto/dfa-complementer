@@ -136,11 +136,11 @@ export function App() {
       />
 
       {/* Main Workspace Section inside Unified Page Container */}
-      <main ref={workspaceRef} className="flex-1 w-full py-10">
+      <main ref={workspaceRef} className="flex-1 w-full py-6 sm:py-10">
         <div className="page-container">
           {/* Workspace Mode Switcher & Title Bar */}
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 mb-8 pb-4 border-b border-white/[0.08]">
-            <div>
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-white/[0.08]">
+            <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-brand-400">
                   Workspace Canvas
@@ -150,54 +150,60 @@ export function App() {
                   {currentDFA.name || 'DFA Complementer Engine'}
                 </span>
               </div>
-              <h2 className="text-xl font-bold text-white tracking-tight mt-1 font-mono">
+              <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight font-mono">
                 Deterministic Finite Automaton Transformation
               </h2>
             </div>
 
-            {/* View Mode Segmented Control */}
-            <div className="flex items-center bg-dark-900 p-1 rounded-xl border border-white/[0.08] shadow-inner font-mono text-xs shrink-0">
-              <button
-                onClick={() => setViewMode('original')}
-                className={`px-3 py-1.5 rounded-lg font-semibold transition ${
-                  viewMode === 'original'
-                    ? 'bg-dark-750 text-slate-100 shadow border border-white/[0.08]'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                Original DFA
-              </button>
-              <button
-                onClick={() => setViewMode('completed')}
-                className={`px-3 py-1.5 rounded-lg font-semibold transition ${
-                  viewMode === 'completed'
-                    ? 'bg-cyan-950 text-cyan-300 shadow border border-cyan-800/60'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                Completed DFA
-              </button>
-              <button
-                onClick={() => setViewMode('complement')}
-                className={`px-3 py-1.5 rounded-lg font-semibold transition ${
-                  viewMode === 'complement'
-                    ? 'bg-brand-950 text-brand-300 shadow border border-brand-800/60'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                Complement DFA (Mᶜ)
-              </button>
-              <button
-                onClick={() => setViewMode('compare')}
-                className={`px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 ${
-                  viewMode === 'compare'
-                    ? 'bg-indigo-900 text-indigo-200 shadow border border-indigo-700/60'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                <ArrowLeftRight className="w-3.5 h-3.5" />
-                Compare
-              </button>
+            {/* View Mode Segmented Control with Horizontal Touch Scroll */}
+            <div className="w-full md:w-auto overflow-x-auto no-scrollbar pb-1 md:pb-0">
+              <div className="inline-flex items-center bg-dark-900 p-1 rounded-xl border border-white/[0.08] shadow-inner font-mono text-xs shrink-0 whitespace-nowrap min-w-full sm:min-w-0">
+                <button
+                  type="button"
+                  onClick={() => setViewMode('original')}
+                  className={`px-3 py-1.5 rounded-lg font-semibold transition ${
+                    viewMode === 'original'
+                      ? 'bg-dark-750 text-slate-100 shadow border border-white/[0.08]'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  Original DFA
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode('completed')}
+                  className={`px-3 py-1.5 rounded-lg font-semibold transition ${
+                    viewMode === 'completed'
+                      ? 'bg-cyan-950 text-cyan-300 shadow border border-cyan-800/60'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  Completed DFA
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode('complement')}
+                  className={`px-3 py-1.5 rounded-lg font-semibold transition ${
+                    viewMode === 'complement'
+                      ? 'bg-brand-950 text-brand-300 shadow border border-brand-800/60'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  Complement DFA (Mᶜ)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode('compare')}
+                  className={`px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 ${
+                    viewMode === 'compare'
+                      ? 'bg-indigo-900 text-indigo-200 shadow border border-indigo-700/60'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  <ArrowLeftRight className="w-3.5 h-3.5" />
+                  Compare
+                </button>
+              </div>
             </div>
           </div>
 
@@ -211,10 +217,10 @@ export function App() {
               />
             </div>
           ) : (
-            /* 3-Column Desktop Grid Layout */
-            <div className="grid grid-cols-1 lg:grid-cols-[minmax(280px,0.95fr)_minmax(400px,1.4fr)_minmax(290px,0.95fr)] gap-6 items-start">
+            /* Adaptive Responsive Grid Layout */
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(280px,0.95fr)_minmax(380px,1.4fr)_minmax(290px,0.95fr)] gap-6 items-start">
               {/* LEFT COLUMN: DFA Input Editor */}
-              <section className="h-[720px] flex flex-col">
+              <section className="h-[520px] sm:h-[600px] lg:h-[720px] flex flex-col min-w-0">
                 <DFAEditor
                   dfa={currentDFA}
                   onChange={(newDFA) => {
@@ -229,13 +235,13 @@ export function App() {
               </section>
 
               {/* CENTER COLUMN: Interactive Visualizer */}
-              <section className="h-[720px] flex flex-col">
+              <section className="h-[420px] sm:h-[500px] lg:h-[720px] flex flex-col min-w-0">
                 <div className="flex flex-col h-full bg-dark-900 border border-white/[0.08] rounded-xl overflow-hidden shadow-xl">
                   {/* Visualizer Header */}
-                  <div className="p-3 border-b border-white/[0.08] bg-dark-850 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
+                  <div className="p-3 border-b border-white/[0.08] bg-dark-850 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 truncate">
                       <span
-                        className={`w-2.5 h-2.5 rounded-full ${
+                        className={`w-2.5 h-2.5 rounded-full shrink-0 ${
                           viewMode === 'complement'
                             ? 'bg-brand-500'
                             : viewMode === 'completed'
@@ -243,21 +249,21 @@ export function App() {
                             : 'bg-emerald-400'
                         }`}
                       />
-                      <span className="text-xs font-bold font-mono text-slate-200 uppercase tracking-wide">
+                      <span className="text-xs font-bold font-mono text-slate-200 uppercase tracking-wide truncate">
                         {viewMode === 'complement'
-                          ? 'Complement Automaton Mᶜ = (Q, Σ, δ, q₀, Q \\ F)'
+                          ? 'Complement Automaton Mᶜ'
                           : viewMode === 'completed'
-                          ? 'Completed Automaton (Trap State Connected)'
+                          ? 'Completed Automaton (Trap Connected)'
                           : 'Original Input Automaton'}
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-slate-400">
+                    <span className="text-[11px] font-mono text-slate-400 shrink-0">
                       Accepting: {'{' + activeDisplayDFA.acceptStates.join(', ') + '}'}
                     </span>
                   </div>
 
                   {/* Graph Visualizer */}
-                  <div className="flex-1 w-full h-full relative">
+                  <div className="flex-1 w-full h-full relative touch-pan-pinch min-h-0">
                     <DFAVisualizer
                       dfa={activeDisplayDFA}
                       viewMode={viewMode}
@@ -272,7 +278,7 @@ export function App() {
               </section>
 
               {/* RIGHT COLUMN: Validation & String Simulation Engine */}
-              <section className="flex flex-col space-y-4">
+              <section className="flex flex-col space-y-4 min-w-0">
                 {/* 1. Validation & Trap State Completion Panel */}
                 <ValidationPanel
                   dfa={currentDFA}
@@ -300,18 +306,19 @@ export function App() {
       </main>
 
       {/* Footer in Global Page Container */}
-      <footer className="mt-12 py-8 border-t border-white/[0.08] bg-[#090a10] text-slate-400 text-xs font-mono">
-        <div className="page-container flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer className="mt-12 py-6 sm:py-8 border-t border-white/[0.08] bg-[#090a10] text-slate-400 text-xs font-mono">
+        <div className="page-container flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex items-center gap-2">
             <span className="font-bold text-slate-200">DFA Complementer</span>
             <span>—</span>
             <span>Interactive DFA Complement Automaton Tool</span>
           </div>
-          <p className="text-slate-500 text-center sm:text-right text-[11px]">
+          <p className="text-slate-500 text-[11px]">
             Academic Project · Design & Analysis of Algorithms / Theory of Computation
           </p>
         </div>
       </footer>
+
 
       {/* Mathematical Theory & Proof Modal */}
       <MathModal

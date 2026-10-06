@@ -392,7 +392,7 @@ export const DFAEditor: React.FC<DFAEditorProps> = ({
 
         {/* 4. Transition Matrix Table δ */}
         <div className="space-y-2 pt-2">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
             <label className="text-xs font-semibold text-slate-300 font-mono flex items-center gap-1.5">
               Transition Function Matrix δ: Q × Σ → Q
             </label>
@@ -401,13 +401,13 @@ export const DFAEditor: React.FC<DFAEditorProps> = ({
             </span>
           </div>
 
-          <div className="overflow-x-auto border border-white/[0.08] rounded-lg bg-dark-850">
-            <table className="w-full text-left font-mono text-xs border-collapse">
+          <div className="overflow-x-auto border border-white/[0.08] rounded-lg bg-dark-850 max-w-full touch-pan-pinch">
+            <table className="w-full min-w-[240px] text-left font-mono text-xs border-collapse">
               <thead>
                 <tr className="border-b border-white/[0.08] bg-dark-800 text-slate-400">
-                  <th className="py-2 px-3">State</th>
+                  <th className="py-2 px-3 sticky left-0 bg-dark-800 z-10">State</th>
                   {dfa.alphabet.map((sym) => (
-                    <th key={sym} className="py-2 px-3 text-cyan-300 font-bold">
+                    <th key={sym} className="py-2 px-3 text-cyan-300 font-bold min-w-[90px]">
                       '{sym}'
                     </th>
                   ))}
@@ -416,7 +416,7 @@ export const DFAEditor: React.FC<DFAEditorProps> = ({
               <tbody className="divide-y divide-white/[0.04]">
                 {dfa.states.map((st) => (
                   <tr key={st} className="hover:bg-white/[0.02]">
-                    <td className="py-2 px-3 font-bold text-slate-200 bg-dark-800/50">
+                    <td className="py-2 px-3 font-bold text-slate-200 bg-dark-800/80 sticky left-0 z-10 border-r border-white/[0.04]">
                       {st}
                     </td>
                     {dfa.alphabet.map((sym) => {
@@ -428,7 +428,7 @@ export const DFAEditor: React.FC<DFAEditorProps> = ({
                             onChange={(e) =>
                               handleTransitionChange(st, sym, e.target.value)
                             }
-                            className={`w-full bg-dark-900 border rounded px-2 py-1 text-xs font-mono focus:outline-none ${
+                            className={`w-full bg-dark-900 border rounded px-2 py-1.5 text-xs font-mono focus:outline-none min-h-[34px] ${
                               currentTarget
                                 ? 'border-white/[0.1] text-slate-100'
                                 : 'border-amber-500/40 text-amber-300/80 bg-amber-950/10'
@@ -454,16 +454,17 @@ export const DFAEditor: React.FC<DFAEditorProps> = ({
 
       {/* Import / Export JSON Modal */}
       {showJsonModal && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-dark-900 border border-white/[0.1] rounded-xl max-w-lg w-full p-5 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-dark-900 border border-white/[0.1] rounded-xl max-w-lg w-full p-4 sm:p-5 shadow-2xl space-y-4 my-auto max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
             <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
               <h3 className="text-sm font-bold text-slate-100 font-mono flex items-center gap-2">
                 <Upload className="w-4 h-4 text-brand-400" />
                 Import / Export DFA JSON
               </h3>
               <button
+                type="button"
                 onClick={() => setShowJsonModal(false)}
-                className="text-slate-400 hover:text-slate-200 text-sm"
+                className="p-1 text-slate-400 hover:text-slate-200 text-sm min-w-[32px] min-h-[32px] flex items-center justify-center"
               >
                 ✕
               </button>
@@ -473,7 +474,7 @@ export const DFAEditor: React.FC<DFAEditorProps> = ({
               <textarea
                 value={jsonText}
                 onChange={(e) => setJsonText(e.target.value)}
-                rows={10}
+                rows={9}
                 className="w-full bg-dark-950 border border-white/[0.08] rounded-lg p-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-brand-500"
               />
               {jsonError && (
@@ -485,14 +486,14 @@ export const DFAEditor: React.FC<DFAEditorProps> = ({
               <button
                 type="button"
                 onClick={() => setShowJsonModal(false)}
-                className="px-3 py-1.5 text-xs text-slate-400 hover:text-slate-200 font-mono"
+                className="px-3 py-2 text-xs text-slate-400 hover:text-slate-200 font-mono min-h-[38px]"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleApplyJson}
-                className="px-4 py-1.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold font-mono rounded-lg transition shadow"
+                className="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold font-mono rounded-lg transition shadow min-h-[38px]"
               >
                 Apply JSON
               </button>
@@ -503,3 +504,4 @@ export const DFAEditor: React.FC<DFAEditorProps> = ({
     </div>
   );
 };
+

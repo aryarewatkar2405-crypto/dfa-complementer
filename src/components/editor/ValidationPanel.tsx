@@ -131,16 +131,16 @@ export const ValidationPanel: React.FC<ValidationPanelProps> = ({
 
           {/* Missing items list */}
           {showMissingDetails && (
-            <div className="grid grid-cols-2 gap-2 bg-dark-900/80 p-2.5 rounded-lg border border-white/[0.06] text-xs font-mono">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-dark-900/80 p-2.5 rounded-lg border border-white/[0.06] text-xs font-mono">
               {missingTransitions.map((m, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between bg-dark-800/90 px-2.5 py-1.5 rounded border border-amber-500/20 text-slate-200"
+                  className="flex items-center justify-between gap-2 bg-dark-800/90 px-2.5 py-1.5 rounded border border-amber-500/20 text-slate-200"
                 >
-                  <span>
+                  <span className="truncate">
                     δ(<strong className="text-amber-300">{m.fromState}</strong>, '{m.symbol}')
                   </span>
-                  <span className="text-slate-400 text-[10px]">→ undefined</span>
+                  <span className="text-slate-400 text-[10px] shrink-0">→ undefined</span>
                 </div>
               ))}
             </div>
@@ -150,10 +150,10 @@ export const ValidationPanel: React.FC<ValidationPanelProps> = ({
           <button
             type="button"
             onClick={onAutoComplete}
-            className="w-full bg-gradient-to-r from-purple-600 to-brand-600 hover:from-purple-500 hover:to-brand-500 text-white py-2.5 px-4 rounded-lg text-xs font-bold font-mono flex items-center justify-center gap-2 transition shadow-lg shadow-brand-900/40"
+            className="w-full bg-gradient-to-r from-purple-600 to-brand-600 hover:from-purple-500 hover:to-brand-500 text-white py-2.5 px-4 rounded-lg text-xs font-bold font-mono flex items-center justify-center gap-2 transition shadow-lg shadow-brand-900/40 min-h-[42px]"
           >
-            <Wand2 className="w-4 h-4" />
-            Auto-Complete with Trap State (qTrap)
+            <Wand2 className="w-4 h-4 shrink-0" />
+            <span className="truncate">Auto-Complete with Trap State (qTrap)</span>
           </button>
         </div>
       )}
@@ -164,14 +164,15 @@ export const ValidationPanel: React.FC<ValidationPanelProps> = ({
           <button
             type="button"
             onClick={onGenerateComplement}
-            className="w-full bg-gradient-to-r from-brand-600 via-indigo-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white py-3 px-4 rounded-xl text-xs font-bold font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xl shadow-brand-900/50 hover:shadow-brand-700/50"
+            className="w-full bg-gradient-to-r from-brand-600 via-indigo-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white py-3 px-4 rounded-xl text-xs font-bold font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xl shadow-brand-900/50 hover:shadow-brand-700/50 min-h-[44px]"
           >
-            <Sparkles className="w-4 h-4 text-brand-200" />
-            Generate Mathematical Complement
-            <ArrowRight className="w-4 h-4" />
+            <Sparkles className="w-4 h-4 text-brand-200 shrink-0" />
+            <span className="truncate">Generate Mathematical Complement</span>
+            <ArrowRight className="w-4 h-4 shrink-0" />
           </button>
         </div>
       )}
     </div>
   );
 };
+

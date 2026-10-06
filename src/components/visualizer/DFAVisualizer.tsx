@@ -225,7 +225,7 @@ export const DFAVisualizer: React.FC<DFAVisualizerProps> = ({
 
   return (
     <div
-      className={`relative w-full h-full min-h-[360px] bg-[#0B1020] overflow-hidden select-none ${className}`}
+      className={`relative w-full h-full min-h-[260px] sm:min-h-[320px] bg-[#0B1020] overflow-hidden select-none touch-pan-pinch ${className}`}
       style={{
         backgroundImage:
           'radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)',
@@ -234,48 +234,52 @@ export const DFAVisualizer: React.FC<DFAVisualizerProps> = ({
     >
       {/* Optional Standalone Header Banner */}
       {title && (
-        <div className="absolute top-3 left-3 z-10 flex items-center gap-2 bg-[#111827]/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-[#334155] shadow-md">
-          <span className="text-xs font-semibold text-slate-200 tracking-wide uppercase font-mono">
+        <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-1.5 bg-[#111827]/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-[#334155] shadow-md max-w-[calc(100%-140px)] truncate">
+          <span className="text-[11px] sm:text-xs font-semibold text-slate-200 tracking-wide uppercase font-mono truncate">
             {title}
           </span>
-          <span className="text-[11px] text-slate-400 font-mono">
-            ({dfa.states.length} states)
+          <span className="text-[10px] sm:text-[11px] text-slate-400 font-mono shrink-0">
+            ({dfa.states.length}s)
           </span>
         </div>
       )}
 
       {/* Floating Toolbar Controls */}
       {!isMiniPreview && (
-        <div className="absolute top-3 right-3 z-10 flex items-center gap-1 bg-[#111827]/90 backdrop-blur-md p-1 rounded-lg border border-[#334155] shadow-lg">
+        <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1 bg-[#111827]/90 backdrop-blur-md p-1 rounded-lg border border-[#334155] shadow-lg">
           <button
             type="button"
             onClick={handleZoomIn}
-            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-[#1E293B] rounded transition"
+            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-[#1E293B] rounded transition min-w-[34px] min-h-[34px] flex items-center justify-center"
             title="Zoom in"
+            aria-label="Zoom in"
           >
             <ZoomIn className="w-4 h-4" />
           </button>
           <button
             type="button"
             onClick={handleZoomOut}
-            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-[#1E293B] rounded transition"
+            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-[#1E293B] rounded transition min-w-[34px] min-h-[34px] flex items-center justify-center"
             title="Zoom out"
+            aria-label="Zoom out"
           >
             <ZoomOut className="w-4 h-4" />
           </button>
           <button
             type="button"
             onClick={handleFit}
-            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-[#1E293B] rounded transition"
+            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-[#1E293B] rounded transition min-w-[34px] min-h-[34px] flex items-center justify-center"
             title="Fit graph"
+            aria-label="Fit graph to screen"
           >
             <Maximize2 className="w-4 h-4" />
           </button>
           <button
             type="button"
             onClick={handleReset}
-            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-[#1E293B] rounded transition"
+            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-[#1E293B] rounded transition min-w-[34px] min-h-[34px] flex items-center justify-center"
             title="Reset view"
+            aria-label="Reset graph view"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
@@ -285,16 +289,16 @@ export const DFAVisualizer: React.FC<DFAVisualizerProps> = ({
       {/* Cytoscape Container Element */}
       <div
         ref={containerRef}
-        className="w-full h-full cursor-grab active:cursor-grabbing"
+        className="w-full h-full cursor-grab active:cursor-grabbing touch-pan-pinch"
       />
 
       {/* State Inspector Drawer */}
       {selectedNodeInfo && !isMiniPreview && (
-        <div className="absolute bottom-3 left-3 z-10 bg-[#111827]/95 backdrop-blur-md border border-[#334155] rounded-lg p-3 text-xs shadow-2xl max-w-xs animate-in fade-in duration-150">
+        <div className="absolute bottom-2.5 left-2.5 z-10 bg-[#111827]/95 backdrop-blur-md border border-[#334155] rounded-lg p-2.5 sm:p-3 text-xs shadow-2xl max-w-[calc(100%-20px)] sm:max-w-xs animate-in fade-in duration-150">
           <div className="flex items-center justify-between gap-3 border-b border-[#334155] pb-1.5 mb-2">
-            <span className="font-mono font-bold text-slate-100 flex items-center gap-1.5">
+            <span className="font-mono font-bold text-slate-100 flex items-center gap-1.5 truncate">
               <span
-                className={`w-2 h-2 rounded-full ${
+                className={`w-2 h-2 rounded-full shrink-0 ${
                   selectedNodeInfo.isAccept ? 'bg-[#34D399]' : 'bg-[#64748B]'
                 }`}
               />
@@ -303,11 +307,13 @@ export const DFAVisualizer: React.FC<DFAVisualizerProps> = ({
             <button
               type="button"
               onClick={() => setSelectedNodeInfo(null)}
-              className="text-slate-400 hover:text-slate-200"
+              className="text-slate-400 hover:text-slate-200 p-1 min-w-[24px] min-h-[24px] flex items-center justify-center"
+              aria-label="Close State Inspector"
             >
               ✕
             </button>
           </div>
+
           <div className="space-y-1 text-slate-300 font-mono text-[11px]">
             <div className="flex justify-between">
               <span className="text-slate-400">Type:</span>

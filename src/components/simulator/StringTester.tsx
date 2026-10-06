@@ -225,7 +225,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
           {simOriginal.isValidInput && (
             <>
               {/* Acceptance Cards Comparison */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 {/* Completed DFA Status */}
                 <div
                   className={`p-3 rounded-lg border font-mono transition ${
@@ -282,8 +282,8 @@ export const StringTester: React.FC<StringTesterProps> = ({
                   </span>
                 </div>
 
-                {/* Path Nodes Flow */}
-                <div className="flex items-center gap-1.5 overflow-x-auto py-1">
+                {/* Path Nodes Flow with horizontal scrolling */}
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 max-w-full touch-pan-pinch">
                   {simOriginal.path.map((st, idx) => {
                     const isCurrent = currentStepIndex === idx;
                     const isTrap = completedDFA.trapStates?.includes(st);
@@ -292,7 +292,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
                     return (
                       <React.Fragment key={idx}>
                         <span
-                          className={`px-2 py-1 rounded text-xs font-mono font-bold transition-all ${
+                          className={`px-2 py-1 rounded text-xs font-mono font-bold shrink-0 transition-all ${
                             isCurrent
                               ? 'bg-cyan-500 text-black ring-2 ring-cyan-400 shadow-md scale-105'
                               : isTrap
@@ -308,7 +308,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
                           )}
                         </span>
                         {idx < simOriginal.path.length - 1 && (
-                          <span className="text-slate-500 text-xs font-mono font-bold">
+                          <span className="text-slate-500 text-xs font-mono font-bold shrink-0">
                             →
                           </span>
                         )}
@@ -323,19 +323,21 @@ export const StringTester: React.FC<StringTesterProps> = ({
               </div>
 
               {/* Traversal Step Controller */}
-              <div className="bg-dark-850 p-3 rounded-lg border border-white/[0.06] flex items-center justify-between gap-2">
+              <div className="bg-dark-850 p-3 rounded-lg border border-white/[0.06] flex flex-wrap items-center justify-between gap-2.5">
                 <div className="flex items-center gap-1.5">
                   <button
+                    type="button"
                     onClick={handleStepBack}
                     disabled={currentStepIndex === 0}
-                    className="p-1.5 bg-dark-750 hover:bg-dark-700 disabled:opacity-30 rounded text-slate-300 transition"
+                    className="p-2 bg-dark-750 hover:bg-dark-700 disabled:opacity-30 rounded text-slate-300 transition min-w-[36px] min-h-[36px] flex items-center justify-center"
                     title="Step Backward"
                   >
                     <SkipBack className="w-4 h-4" />
                   </button>
                   <button
+                    type="button"
                     onClick={togglePlay}
-                    className="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white rounded text-xs font-mono font-semibold flex items-center gap-1.5 transition shadow"
+                    className="px-3.5 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded text-xs font-mono font-semibold flex items-center gap-1.5 transition shadow min-h-[36px]"
                   >
                     {isPlaying ? (
                       <>
@@ -348,9 +350,10 @@ export const StringTester: React.FC<StringTesterProps> = ({
                     )}
                   </button>
                   <button
+                    type="button"
                     onClick={handleStepForward}
                     disabled={currentStepIndex >= simOriginal.steps.length - 1}
-                    className="p-1.5 bg-dark-750 hover:bg-dark-700 disabled:opacity-30 rounded text-slate-300 transition"
+                    className="p-2 bg-dark-750 hover:bg-dark-700 disabled:opacity-30 rounded text-slate-300 transition min-w-[36px] min-h-[36px] flex items-center justify-center"
                     title="Step Forward"
                   >
                     <SkipForward className="w-4 h-4" />
@@ -367,10 +370,11 @@ export const StringTester: React.FC<StringTesterProps> = ({
                   ].map((s) => (
                     <button
                       key={s.label}
+                      type="button"
                       onClick={() => setPlaybackSpeed(s.ms)}
-                      className={`px-1.5 py-0.5 rounded transition ${
+                      className={`px-2 py-1 rounded transition min-h-[30px] ${
                         playbackSpeed === s.ms
-                          ? 'bg-brand-600 text-white'
+                          ? 'bg-brand-600 text-white font-bold'
                           : 'bg-dark-700 text-slate-400 hover:text-slate-200'
                       }`}
                     >
@@ -383,6 +387,7 @@ export const StringTester: React.FC<StringTesterProps> = ({
           )}
         </div>
       ) : (
+
         /* Test Suite Tab */
         <div className="space-y-4">
           {/* Add custom test case form */}

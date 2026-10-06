@@ -10,33 +10,36 @@ export const MathModal: React.FC<MathModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-dark-900 border border-white/[0.1] rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-6 animate-in fade-in zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+      <div className="bg-dark-900 border border-white/[0.1] rounded-2xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl space-y-5 my-auto max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-3 sm:pb-4 gap-2">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-lg bg-brand-950 border border-brand-800/50 text-brand-400">
-              <BookOpen className="w-5 h-5" />
+            <div className="p-2 rounded-lg bg-brand-950 border border-brand-800/50 text-brand-400 shrink-0">
+              <BookOpen className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-100 font-mono">
+              <h2 className="text-sm sm:text-base font-bold text-slate-100 font-mono">
                 Formal Automata Theory & Proof
               </h2>
-              <p className="text-xs text-slate-400 font-mono">
+              <p className="text-[11px] sm:text-xs text-slate-400 font-mono">
                 Design & Analysis of Algorithms / Theory of Computation
               </p>
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-white/[0.06] rounded-lg transition"
+            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-white/[0.06] rounded-lg transition min-w-[36px] min-h-[36px] flex items-center justify-center"
+            aria-label="Close Theory Modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="space-y-5 text-xs text-slate-300 font-mono leading-relaxed max-h-[65vh] overflow-y-auto pr-2">
+        <div className="space-y-5 text-xs text-slate-300 font-mono leading-relaxed pr-1">
+
           {/* Section 1: Definition */}
           <div className="bg-dark-850 p-4 rounded-xl border border-white/[0.06] space-y-2">
             <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">

@@ -117,73 +117,77 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
   const current = steps[currentStep];
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-dark-900 border border-white/[0.1] rounded-2xl max-w-4xl w-full p-6 shadow-2xl space-y-5 animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+      <div className="bg-dark-900 border border-white/[0.1] rounded-2xl max-w-4xl w-full p-4 sm:p-6 shadow-2xl space-y-4 sm:space-y-5 my-auto max-h-[92vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
         {/* Top Header */}
-        <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-indigo-950 border border-indigo-700/60 text-indigo-400">
-              <Presentation className="w-5 h-5" />
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-3 sm:pb-4 gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="p-2 rounded-xl bg-indigo-950 border border-indigo-700/60 text-indigo-400 shrink-0">
+              <Presentation className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-slate-100 font-mono">
+                <h2 className="text-sm sm:text-base font-bold text-slate-100 font-mono">
                   Presentation & Demonstration Mode
                 </h2>
-                <span className="text-[10px] bg-brand-950 text-brand-300 px-2 py-0.5 rounded border border-brand-800 font-mono font-bold">
-                  Step {currentStep + 1} of {steps.length}
+                <span className="text-[9px] sm:text-[10px] bg-brand-950 text-brand-300 px-2 py-0.5 rounded border border-brand-800 font-mono font-bold shrink-0">
+                  {currentStep + 1}/{steps.length}
                 </span>
               </div>
-              <p className="text-xs text-slate-400 font-mono">
+              <p className="text-[11px] sm:text-xs text-slate-400 font-mono hidden sm:block">
                 Interactive walk-through for Academic Evaluation & Viva
               </p>
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-white/[0.06] rounded-lg transition"
+            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-white/[0.06] rounded-lg transition min-w-[36px] min-h-[36px] flex items-center justify-center"
+            aria-label="Close Presentation Mode"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Step Progress Pills */}
-        <div className="grid grid-cols-6 gap-2">
+        <div className="grid grid-cols-6 gap-1.5 sm:gap-2">
           {steps.map((_, idx) => (
             <button
               key={idx}
+              type="button"
               onClick={() => setCurrentStep(idx)}
-              className={`h-2 rounded-full transition-all ${
+              className={`h-2 rounded-full transition-all min-h-[8px] ${
                 currentStep === idx
                   ? 'bg-brand-500 ring-2 ring-brand-400 shadow-md shadow-brand-500/30'
                   : currentStep > idx
                   ? 'bg-emerald-500'
                   : 'bg-dark-750'
               }`}
+              title={`Jump to step ${idx + 1}`}
             />
           ))}
         </div>
 
         {/* Active Step Content */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 items-center">
           {/* Left: Step Info & Explanation */}
-          <div className="md:col-span-5 space-y-3 font-mono">
+          <div className="md:col-span-5 space-y-2.5 sm:space-y-3 font-mono">
             <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-brand-400 bg-brand-950/80 px-2.5 py-1 rounded border border-brand-800/60">
               {current.badge}
             </span>
-            <h3 className="text-base font-bold text-slate-100">
+            <h3 className="text-sm sm:text-base font-bold text-slate-100">
               {current.title}
             </h3>
             <p className="text-xs text-cyan-400 font-semibold">
               {current.subtitle}
             </p>
-            <div className="bg-dark-850 p-3.5 rounded-xl border border-white/[0.06] text-xs text-slate-300 leading-relaxed whitespace-pre-line">
+            <div className="bg-dark-850 p-3 sm:p-3.5 rounded-xl border border-white/[0.06] text-xs text-slate-300 leading-relaxed whitespace-pre-line">
               {current.explanation}
             </div>
           </div>
 
           {/* Right: Live Interactive Graph Preview */}
-          <div className="md:col-span-7 h-[280px]">
+          <div className="md:col-span-7 h-[220px] sm:h-[260px] md:h-[280px] touch-pan-pinch">
             <DFAVisualizer
               dfa={current.dfa}
               title={current.dfa.name}
@@ -200,42 +204,46 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
         </div>
 
         {/* Footer Navigation */}
-        <div className="flex items-center justify-between pt-3 border-t border-white/[0.08] font-mono text-xs">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-3 border-t border-white/[0.08] font-mono text-xs">
           <button
+            type="button"
             onClick={() => setCurrentStep((prev) => Math.max(0, prev - 1))}
             disabled={currentStep === 0}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-dark-800 text-slate-300 hover:text-white disabled:opacity-30 transition"
+            className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-dark-800 text-slate-300 hover:text-white disabled:opacity-30 transition min-h-[38px]"
           >
             <ArrowLeft className="w-4 h-4" />
             Previous Step
           </button>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <button
+              type="button"
               onClick={() => {
                 onApplyToWorkspace(current.dfa);
                 onClose();
               }}
-              className="px-3 py-2 rounded-lg bg-dark-750 hover:bg-dark-700 text-slate-200 border border-white/[0.08] transition"
+              className="px-3 py-2 rounded-lg bg-dark-750 hover:bg-dark-700 text-slate-200 border border-white/[0.08] text-center transition min-h-[38px]"
             >
-              Apply this DFA to Workspace
+              Apply to Workspace
             </button>
 
             {currentStep < steps.length - 1 ? (
               <button
+                type="button"
                 onClick={() => setCurrentStep((prev) => Math.min(steps.length - 1, prev + 1))}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold transition shadow-lg shadow-brand-900/40"
+                className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold transition shadow-lg shadow-brand-900/40 min-h-[38px]"
               >
-                Next Step
+                <span>Next Step</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             ) : (
               <button
+                type="button"
                 onClick={onClose}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition"
+                className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition min-h-[38px]"
               >
                 <CheckCircle2 className="w-4 h-4" />
-                Finish Demo
+                <span>Finish Demo</span>
               </button>
             )}
           </div>
@@ -244,3 +252,4 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
     </div>
   );
 };
+
