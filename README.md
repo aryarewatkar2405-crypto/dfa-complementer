@@ -243,17 +243,95 @@ The laboratory includes pre-configured automata models demonstrating theoretical
 
 ---
 
-## 💻 Tech Stack
+## 💻 Comprehensive Tech Stack & Engineering Architecture
 
-- **UI Framework**: [React 19](https://react.dev/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Bundler & Dev Server**: [Vite 8](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS 3.4](https://tailwindcss.com/)
-- **Graph Visualization**: [Cytoscape.js](https://js.cytoscape.org/)
-- **Animation**: [Framer Motion](https://www.framer.com/motion/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Testing**: [Vitest](https://vitest.dev/)
-- **Linter**: [Oxlint](https://oxc.rs/)
+DFA Complementer is engineered with a modular, highly performant client-side stack combining modern frontend frameworks, graph theory layout engines, formal automata math solvers, and strict quality assurance pipelines.
+
+### 🛠️ Technology Stack Matrix
+
+| Category | Technology | Version | Purpose & Architectural Role |
+| :--- | :--- | :--- | :--- |
+| **Core Framework** | [React](https://react.dev/) | `^19.2.8` | Declarative UI component tree, state synchronization, concurrent rendering, and reactive DOM updates. |
+| **Programming Language** | [TypeScript](https://www.typescriptlang.org/) | `~6.0.2` | End-to-end static type safety, formal algebraic 5-tuple data modeling, and strict compile-time checks. |
+| **Build & Bundler** | [Vite](https://vitejs.dev/) | `^8.3.0` | Ultra-fast ESM-based development server, sub-second HMR, and optimized tree-shaken production rollup. |
+| **Graph Visualization** | [Cytoscape.js](https://js.cytoscape.org/) | `^3.34.3` | High-performance HTML5 Canvas-based graph rendering engine for directed state-transition diagrams. |
+| **Graph Layout Engine** | [cytoscape-dagre](https://github.com/cytoscape/cytoscape.js-dagre) | `^4.0.1` | Hierarchical Directed Acyclic Graph (DAG) layout integration for layered state-machine topology. |
+| **Styling & Design System** | [Tailwind CSS](https://tailwindcss.com/) | `^3.4.19` | Custom utility-first CSS design tokens, modern dark-mode aesthetic, and fluid responsive breakpoints. |
+| **CSS Post-Processing** | [PostCSS](https://postcss.org/) & [Autoprefixer](https://github.com/postcss/autoprefixer) | `^8.5.29` / `^10.6.1` | Automated vendor prefixing and CSS transformation pipeline for cross-browser compatibility. |
+| **Class Utilities** | [clsx](https://github.com/lukeed/clsx) & [tailwind-merge](https://github.com/dcastil/tailwind-merge) | `^2.1.1` / `^3.7.0` | Conflict-free conditional className composition and dynamic class resolution. |
+| **Animation & Motion** | [Framer Motion](https://www.framer.com/motion/) | `^14.0.0` | Hardware-accelerated modal dialogs, smooth accordion transitions, and interactive visual polish. |
+| **Visual FX** | [canvas-confetti](https://www.npmjs.com/package/canvas-confetti) | `^1.9.4` | Canvas particle celebration feedback when batch test suites or presentation modes complete successfully. |
+| **Iconography** | [Lucide React](https://lucide.dev/) | `^1.52.0` | Crisp, tree-shakeable SVG icons for state actions, playback controls, and status indicators. |
+| **Unit Testing** | [Vitest](https://vitest.dev/) | `^5.0.3` | Blazing-fast Vite-native testing framework for formal automata proofs and edge-case regression suites. |
+| **Linting & Code Health** | [Oxlint](https://oxc.rs/) | `^1.81.0` | Next-generation Rust-based linter executing static analysis checks in milliseconds. |
+| **Continuous Integration** | [GitHub Actions](https://github.com/features/actions) | `v4` | Automated CI pipeline executing linting, strict typechecking, unit tests, and production build validation. |
+| **Edge Deployment** | [Vercel](https://vercel.com/) | Edge Network | Global CDN hosting with zero-config SPA routing, asset compression, and instant SSL. |
+
+---
+
+### 🏛️ Architectural Layer Breakdown
+
+The project follows a clean separation of concerns across 4 distinct architectural layers:
+
+```
+┌───────────────────────────────────────────────────────────────────┐
+│                       1. PRESENTATION LAYER                       │
+│  [HeroSection] [Navbar] [DFAEditor] [CompareView] [MathModal]     │
+│  • React 19 Components  • Tailwind CSS Dark Theme  • Framer Motion │
+└─────────────────────────────────┬─────────────────────────────────┘
+                                  │
+┌─────────────────────────────────▼─────────────────────────────────┐
+│                    2. VISUALIZATION & CANVAS LAYER                │
+│  [DFAVisualizer] ───► [dfaGraphEngine] ───► [Cytoscape.js Canvas] │
+│  • Topological BFS Grid Layout  • Arc Separation  • Loop Routing │
+└─────────────────────────────────┬─────────────────────────────────┘
+                                  │
+┌─────────────────────────────────▼─────────────────────────────────┐
+│                    3. SIMULATION & PLAYBACK LAYER                 │
+│  [StringTester] ───► [Batch Simulator] ───► [Step Animator]       │
+│  • Step-by-step tape playback  • Active state tracking  • Speed    │
+└─────────────────────────────────┬─────────────────────────────────┘
+                                  │
+┌─────────────────────────────────▼─────────────────────────────────┐
+│                  4. MATHEMATICAL AUTOMATA CORE                    │
+│  [dfaOperations] ───► [Validation] [Completion] [Complement]      │
+│  • 5-Tuple (Q, Σ, δ, q0, F)  • Trap Injection  • Set Complementation│
+└───────────────────────────────────────────────────────────────────┘
+```
+
+#### 1. Mathematical Automata Core (`src/core/dfaOperations.ts`)
+- **Zero UI Dependencies**: Pure mathematical functions operating on immutable data structures.
+- **Validation Engine**: Audits alphabet legality, transition determinism, start state membership, and final state subsets.
+- **Automatic Completer**: Identifies missing $\delta(q, a)$ pairs and generates a canonical self-looping trap state $q_{trap}$.
+- **Complement Engine**: Applies the formal set difference $F^c = Q \setminus F$ ensuring complete mathematical isomorphism.
+- **Simulation Engine**: Traces input strings step-by-step, generating transition tape histories and acceptance verdicts.
+
+#### 2. Graph Topology & Visualization Engine (`src/components/visualizer/dfaGraphEngine.ts`)
+- **Adaptive Spanning Layout**: Combines Breadth-First Search (BFS) reachability levels with hierarchical positioning to spread states naturally without crowding or overlapping.
+- **Dynamic Edge Routing**: Dynamically calculates Bezier curve weights and control points to separate antiparallel transitions ($q_i \to q_j$ vs $q_j \to q_i$) and route self-loops ($q_i \to q_i$) without colliding with node labels.
+- **Node Collision Avoidance**: Automatically applies minimum bounding separation ($>160\text{px}$) and dynamic canvas viewport fitting.
+- **Mathematical Styling**: Distinct visual markers for Start states (incoming start pointer) and Final/Accepting states (concentric double borders).
+
+#### 3. Reactive State & Simulation Layer (`src/components/simulator/StringTester.tsx`)
+- **Step-by-Step Animation**: Controlled playback ticker (`requestAnimationFrame` / intervals) allowing forward stepping, speed adjustments, and pause/reset controls.
+- **Batch Evaluation Harness**: Evaluates suites of test strings against both the original/completed DFA ($M$) and complemented DFA ($M^c$) to verify the invariant $L(M) \cap L(M^c) = \emptyset$.
+
+#### 4. Design System & User Interface (`src/index.css`, `src/components/layout/`)
+- **Curated Palette**: Deep cosmic dark theme (`#07080B` canvas, `#0E1017` card surfaces, `#6366F1` indigo accents, `#34D399` emerald successes, and `#A78BFA` violet indicators).
+- **Responsive Layout**: Fluid CSS Grid and Flexbox structures optimized from ultra-compact smartphones (320px) up to 4K displays (1920px+).
+
+---
+
+### 📦 Package Selection & Engineering Rationale
+
+- **Why React 19 + TypeScript?**
+  Guarantees type-level safety across complex state mutations when manipulating 5-tuple matrices and ensures optimal reconciliation performance during high-frequency string simulation.
+- **Why Cytoscape.js over D3 / Graphviz?**
+  Cytoscape.js offers dedicated hardware-accelerated Canvas rendering specifically designed for interactive directed graphs, with built-in pinch-to-zoom, pan, touch gestures, and rich stylesheet selectors.
+- **Why Oxlint over standard ESLint?**
+  Oxlint runs in single-digit milliseconds, providing instantaneous developer feedback and drastically accelerating CI build pipelines.
+- **Why Vitest?**
+  Shares the exact same transform pipeline and Vite configuration, enabling instant test runs without duplicate compilation steps.
 
 ---
 
