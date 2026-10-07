@@ -15,12 +15,25 @@ import { CompareView } from './components/visualizer/CompareView';
 import { StringTester } from './components/simulator/StringTester';
 import { MathModal } from './components/explanation/MathModal';
 import { PresentationModeModal } from './components/layout/PresentationModeModal';
+import { usePWAInstall } from './pwa/usePWAInstall';
+import { IOSInstallGuideModal } from './pwa/IOSInstallGuideModal';
 import { ArrowLeftRight } from 'lucide-react';
 
 export function App() {
+  // PWA Installation Hook
+  const {
+    isInstallable,
+    isInstalled,
+    isIOS,
+    showIOSGuide,
+    setShowIOSGuide,
+    promptInstall,
+  } = usePWAInstall();
+
   // Default Initial DFA: Incomplete "Starts with 01" to showcase auto-trap completion
   const [currentDFA, setCurrentDFA] = useState<DFA>(DFA_PRESETS[0].dfa);
   const [viewMode, setViewMode] = useState<DFAViewMode>('original');
+
 
   // Modals state
   const [isMathModalOpen, setIsMathModalOpen] = useState(false);
@@ -122,6 +135,8 @@ export function App() {
         onOpenDemoMode={() => setIsDemoModalOpen(true)}
         onScrollToWorkspace={scrollToWorkspace}
         onLoadExample={() => handleLoadPreset(DFA_PRESETS[1].id)}
+        isInstallable={isInstallable || (isIOS && !isInstalled)}
+        onInstallClick={promptInstall}
       />
 
       {/* Hero Section */}
@@ -335,6 +350,12 @@ export function App() {
           setViewMode('completed');
           scrollToWorkspace();
         }}
+      />
+
+      {/* iOS Safari Add to Home Screen Instructions Modal */}
+      <IOSInstallGuideModal
+        isOpen={showIOSGuide}
+        onClose={() => setShowIOSGuide(false)}
       />
     </div>
   );

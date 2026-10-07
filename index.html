@@ -2,10 +2,26 @@
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'/><path d='m8 12 3 3 5-6'/></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DFA Complementer — Transform Validated DFAs into Mathematical Complements</title>
-    <meta name="description" content="Validate, auto-complete missing transitions with trap states, compute the mathematical complement L(Mᶜ) = Σ* - L(M), and interactively simulate strings step-by-step." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+    <title>DFA Complementer</title>
+    <meta name="description" content="Interactive DFA complementation and verification tool. Validate, auto-complete missing transitions with trap states, compute the mathematical complement L(Mᶜ) = Σ* - L(M), and interactively simulate strings step-by-step." />
+    
+    <!-- PWA / Mobile Web App Meta -->
+    <meta name="application-name" content="DFA Complementer" />
+    <meta name="apple-mobile-web-app-title" content="DFA Complementer" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#8B5CF6" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#07080B" />
+    <meta name="background-color" content="#07080B" />
+    
+    <!-- Web App Manifest & App Icons -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/pwa-512x512.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     
     <!-- Google Fonts: Inter and JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,3 +33,4 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+

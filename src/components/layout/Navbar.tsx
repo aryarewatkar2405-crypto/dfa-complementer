@@ -7,6 +7,7 @@ import {
   Menu,
   X,
   ArrowRight,
+  Download,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -14,6 +15,8 @@ interface NavbarProps {
   onOpenDemoMode: () => void;
   onScrollToWorkspace: () => void;
   onLoadExample: () => void;
+  isInstallable?: boolean;
+  onInstallClick?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -21,6 +24,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenDemoMode,
   onScrollToWorkspace,
   onLoadExample,
+  isInstallable,
+  onInstallClick,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -79,6 +84,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>Presentation Mode</span>
           </button>
 
+          {isInstallable && onInstallClick && (
+            <button
+              type="button"
+              onClick={onInstallClick}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-950/80 hover:bg-emerald-900/80 text-emerald-300 border border-emerald-700/50 transition shadow min-h-[38px]"
+              title="Install DFA Complementer as App"
+            >
+              <Download className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Install App</span>
+            </button>
+          )}
+
           <button
             type="button"
             onClick={onScrollToWorkspace}
@@ -91,6 +108,18 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Mobile & Tablet Action Bar (< lg) */}
         <div className="flex lg:hidden items-center gap-2 font-mono text-xs">
+          {isInstallable && onInstallClick && (
+            <button
+              type="button"
+              onClick={onInstallClick}
+              className="flex items-center gap-1 px-2.5 py-2 rounded-lg bg-emerald-950/80 border border-emerald-700/60 text-emerald-300 font-semibold text-[11px] transition shadow"
+              title="Install DFA Complementer"
+            >
+              <Download className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Install</span>
+            </button>
+          )}
+
           <button
             type="button"
             onClick={onScrollToWorkspace}
@@ -114,6 +143,20 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Dropdown Drawer Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-white/[0.08] bg-[#090a10]/95 backdrop-blur-2xl px-4 py-3 space-y-2 font-mono text-xs shadow-2xl animate-in slide-in-from-top-2 duration-150">
+          {isInstallable && onInstallClick && (
+            <button
+              type="button"
+              onClick={() => {
+                onInstallClick();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-emerald-950/80 text-emerald-200 border border-emerald-700/50 text-left transition min-h-[44px]"
+            >
+              <Download className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>Install DFA Complementer App</span>
+            </button>
+          )}
+
           <button
             type="button"
             onClick={() => {
@@ -154,4 +197,5 @@ export const Navbar: React.FC<NavbarProps> = ({
     </header>
   );
 };
+
 
